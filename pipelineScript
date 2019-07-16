@@ -1,4 +1,7 @@
 node {
    stage 'Run JMeter Test'
    bat 'C:/Users/pankaj.pandey/Downloads/Frameworks/apache-jmeter-5.0/apache-jmeter-5.0/bin/jmeter.bat -n -t C:/Users/pankaj.pandey/Downloads/JMeter_Tests/APITests.jmx -l test.jtl'
+step([$class: 'ArtifactArchiver', artifacts: '**/*.jtl, **/jmeter.log'])
+
+step([perfReport filterRegex: '', sourceDataFiles: 'C:/Users/pankaj.pandey/Downloads/JMeter_Tests/test.jtl'])
 }
